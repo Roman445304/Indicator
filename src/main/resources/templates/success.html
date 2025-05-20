@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Успешно сохранено</title>
+    <style>
+        body {
+            background-color: #d6f5d6; /* светло-зеленый */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 80px;
+            color: #4CAF50; /* ярко-зелёный */
+        }
+
+        .message {
+            font-size: 28px;
+            color: #2e7d32;
+            margin-top: 10px;
+        }
+    </style>
+
+    <!-- Иконки из Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+<div class="container">
+    <div class="icon">
+        👍
+    </div>
+    <div class="message">
+        Данные сохранены, приходи ещё!
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        window.location.href = "/dashboard";
+    }, 5000);
+</script>
+</body>
+</html>

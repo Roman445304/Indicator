@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Form</title>
+    <style>
+        .error { color: red; }
+        .form-group { margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+<h1>Добавить доход</h1>
+
+<form th:action="@{/income}" th:object="${income}" method="post">
+    <div class="form-group">
+        <label>Имя:</label>
+        <input type="text" th:field="*{name}" required>
+        <span th:if="${error}" class="error" th:text="${error}"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Спорт:</label>
+        <input type="number" step="0.01" th:field="*{sport}" required>
+        <span th:errors="*{sport}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Чтение:</label>
+        <input type="number" step="0.01" th:field="*{reading}" required>
+        <span th:errors="*{reading}" class="error"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Английский:</label>
+        <input type="number" step="0.01" th:field="*{english}" required>
+        <span th:errors="*{english}" class="error"></span>
+    </div>
+
+    <button type="submit">Отправить</button>
+</form>
+</body>
+</html>

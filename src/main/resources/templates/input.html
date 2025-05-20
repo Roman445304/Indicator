@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Трекер занятий</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f3fff3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            width: 360px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d6a4f;
+        }
+
+        label {
+            margin-top: 15px;
+            display: block;
+            font-weight: bold;
+        }
+
+        .slider-wrapper {
+            margin-top: 10px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .value {
+            font-size: 14px;
+            color: #444;
+            text-align: right;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+        }
+
+        button {
+            margin-top: 25px;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Сколько ты занимался?</h2>
+    <form th:action="@{/saveData}" method="post" onsubmit="handleOthersDefault()">
+
+        <label for="sport">Спорт:</label>
+        <div class="slider-wrapper">
+            <input type="range" id="sport" name="sport" min="0" max="360" step="5" oninput="sportVal.textContent = this.value + ' мин'" value="0">
+            <div class="value"><span id="sportVal">0 мин</span></div>
+        </div>
+
+        <label for="reading">Чтение:</label>
+        <div class="slider-wrapper">
+            <input type="range" id="reading" name="reading" min="0" max="360" step="5" oninput="readingVal.textContent = this.value + ' мин'" value="0">
+            <div class="value"><span id="readingVal">0 мин</span></div>
+        </div>
+
+        <label for="english">Английский:</label>
+        <div class="slider-wrapper">
+            <input type="range" id="english" name="english" min="0" max="360" step="5" oninput="englishVal.textContent = this.value + ' мин'" value="0">
+            <div class="value"><span id="englishVal">0 мин</span></div>
+        </div>
+
+        <label for="education">Образование:</label>
+        <div class="slider-wrapper">
+            <input type="range" id="education" name="education" min="0" max="360" step="5" oninput="educationVal.textContent = this.value + ' мин'" value="0">
+            <div class="value"><span id="educationVal">0 мин</span></div>
+        </div>
+
+        <label for="others">Другое:</label>
+        <select id="others" name="others">
+            <option value="" disabled selected>Выбери</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+
+<script>
+    // Обновление значений при загрузке
+    sportVal.textContent = "0 мин";
+    readingVal.textContent = "0 мин";
+    englishVal.textContent = "0 мин";
+    educationVal.textContent = "0 мин";
+
+    function handleOthersDefault() {
+        const othersSelect = document.getElementById('others');
+        if (!othersSelect.value) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'others';
+            hiddenInput.value = '0';
+            othersSelect.form.appendChild(hiddenInput);
+        }
+    }
+</script>
+</body>
+</html>
