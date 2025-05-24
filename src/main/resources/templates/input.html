@@ -13,12 +13,26 @@
             height: 100vh;
         }
 
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .wrapper {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+        }
+
         .container {
             background: #fff;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             width: 360px;
+            box-sizing: border-box;
         }
 
         h2 {
@@ -53,10 +67,10 @@
             border-radius: 6px;
         }
 
-        button {
-            margin-top: 25px;
-            width: 100%;
-            padding: 10px;
+        .submit-button {
+            margin-top: 30px;
+            width: 300px;
+            padding: 12px;
             background-color: #28a745;
             border: none;
             color: white;
@@ -65,60 +79,75 @@
             cursor: pointer;
         }
 
-        button:hover {
+        .submit-button:hover {
             background-color: #218838;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2>Сколько ты занимался?</h2>
-    <form th:action="@{/saveData}" method="post" onsubmit="handleOthersDefault()">
+<form th:action="@{/saveData}" method="post" onsubmit="handleOthersDefault()">
 
-        <label for="sport">Спорт:</label>
-        <div class="slider-wrapper">
-            <input type="range" id="sport" name="sport" min="0" max="360" step="5" oninput="sportVal.textContent = this.value + ' мин'" value="0">
-            <div class="value"><span id="sportVal">0 мин</span></div>
+    <div class="wrapper">
+        <!-- Внести данные -->
+        <div class="container">
+            <h2>Внести данные</h2>
+
+            <label for="sport">Спорт:</label>
+            <div class="slider-wrapper">
+                <input type="range" id="sport" name="sport" min="0" max="360" step="5" oninput="sportVal.textContent = this.value + ' мин'" value="0">
+                <div class="value"><span id="sportVal">0 мин</span></div>
+            </div>
+
+            <label for="reading">Чтение:</label>
+            <div class="slider-wrapper">
+                <input type="range" id="reading" name="reading" min="0" max="360" step="5" oninput="readingVal.textContent = this.value + ' мин'" value="0">
+                <div class="value"><span id="readingVal">0 мин</span></div>
+            </div>
+
+            <label for="english">Английский:</label>
+            <div class="slider-wrapper">
+                <input type="range" id="english" name="english" min="0" max="360" step="5" oninput="englishVal.textContent = this.value + ' мин'" value="0">
+                <div class="value"><span id="englishVal">0 мин</span></div>
+            </div>
+
+            <label for="education">Образование:</label>
+            <div class="slider-wrapper">
+                <input type="range" id="education" name="education" min="0" max="360" step="5" oninput="educationVal.textContent = this.value + ' мин'" value="0">
+                <div class="value"><span id="educationVal">0 мин</span></div>
+            </div>
+
+            <label for="others">Другое:</label>
+            <select id="others" name="others">
+                <option value="" disabled selected>Выбери</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
         </div>
 
-        <label for="reading">Чтение:</label>
-        <div class="slider-wrapper">
-            <input type="range" id="reading" name="reading" min="0" max="360" step="5" oninput="readingVal.textContent = this.value + ' мин'" value="0">
-            <div class="value"><span id="readingVal">0 мин</span></div>
+        <!-- Списать время -->
+        <div class="container">
+            <h2>Списать время</h2>
+
+            <label for="writeOff">Списать:</label>
+            <div class="slider-wrapper">
+                <input type="range" id="writeOff" name="writeOff" min="0" max="360" step="5" oninput="writeOffVal.textContent = this.value + ' мин'" value="0">
+                <div class="value"><span id="writeOffVal">0 мин</span></div>
+            </div>
         </div>
+    </div>
 
-        <label for="english">Английский:</label>
-        <div class="slider-wrapper">
-            <input type="range" id="english" name="english" min="0" max="360" step="5" oninput="englishVal.textContent = this.value + ' мин'" value="0">
-            <div class="value"><span id="englishVal">0 мин</span></div>
-        </div>
-
-        <label for="education">Образование:</label>
-        <div class="slider-wrapper">
-            <input type="range" id="education" name="education" min="0" max="360" step="5" oninput="educationVal.textContent = this.value + ' мин'" value="0">
-            <div class="value"><span id="educationVal">0 мин</span></div>
-        </div>
-
-        <label for="others">Другое:</label>
-        <select id="others" name="others">
-            <option value="" disabled selected>Выбери</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-        </select>
-
-        <button type="submit">Сохранить</button>
-    </form>
-</div>
+    <button type="submit" class="submit-button">Сохранить</button>
+</form>
 
 <script>
-    // Обновление значений при загрузке
     sportVal.textContent = "0 мин";
     readingVal.textContent = "0 мин";
     englishVal.textContent = "0 мин";
     educationVal.textContent = "0 мин";
+    writeOffVal.textContent = "0 мин";
 
     function handleOthersDefault() {
         const othersSelect = document.getElementById('others');
