@@ -43,13 +43,18 @@ public class ActivityService {
 
     private Activity getActivity(ActivityData data, Optional<User> userOptional) {
         User user = userOptional.orElseThrow(RuntimeException::new);
-        Activity activity = new Activity();
-        activity.setEducation(data.getEducation());
-        activity.setOthers(data.getOthers() * 10);
-        activity.setReading(data.getReading());
-        activity.setEnglish(data.getEnglish());
-        activity.setSport(data.getSport());
-        activity.setUser(user);
-        return activity;
+        return Activity.builder()
+                .education(data.getEducation())
+                .others(data.getOthers())
+                .reading(data.getReading())
+                .english(data.getEnglish())
+                .sport(data.getSport())
+                .writeOff(toNegative(data.getWriteOff()))
+                .user(user)
+                .build();
+    }
+
+    private int toNegative (int value) {
+        return value > 0 ? -value : value;
     }
 }

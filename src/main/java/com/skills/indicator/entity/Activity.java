@@ -2,19 +2,16 @@ package com.skills.indicator.entity;
 
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import java.time.LocalDate;
 
-import java.time.LocalDateTime;
-
+@Data
 @Entity
 @Table(name = "activity")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Activity {
 
     @Id
@@ -31,73 +28,15 @@ public class Activity {
 
     private Integer education;
 
+    @Column(name = "write_off")
+    private Integer writeOff;
+
     @ManyToOne()
     @JoinColumn(name="user_id")
     private User user;
+
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", updatable = false)
+    private LocalDate createdAt;
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getSport() {
-        return sport;
-    }
-
-    public void setSport(Integer sport) {
-        this.sport = sport;
-    }
-
-    public Integer getReading() {
-        return reading;
-    }
-
-    public void setReading(Integer reading) {
-        this.reading = reading;
-    }
-
-    public Integer getEnglish() {
-        return english;
-    }
-
-    public void setEnglish(Integer english) {
-        this.english = english;
-    }
-
-    public Integer getOthers() {
-        return others;
-    }
-
-    public void setOthers(Integer others) {
-        this.others = others;
-    }
-
-    public Integer getEducation() {
-        return education;
-    }
-
-    public void setEducation(Integer education) {
-        this.education = education;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }

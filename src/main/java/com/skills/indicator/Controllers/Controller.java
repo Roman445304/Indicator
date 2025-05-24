@@ -40,18 +40,19 @@ public class Controller {
 
 
     @PostMapping("/saveData")
-    public String postActivity(ActivityData data, Principal principal){
-        System.out.println("Sport: " + data.getSport());
-        System.out.println("Reading: " + data.getReading());
-        System.out.println("English: " + data.getEnglish());
-        System.out.println("Education: " + data.getEducation());
-        System.out.println("Others: " + data.getOthers());
+    public String postActivity(
+            @RequestParam(required = false) Integer sport,
+            @RequestParam(required = false) Integer education,
+            @RequestParam(required = false) Integer others,
+            @RequestParam(required = false) Integer english,
+            @RequestParam(required = false) Integer reading,
+            @RequestParam(required = false) Integer writeOff
+            , Principal principal){
 
         String username = principal.getName();
-
+        ActivityData data = new ActivityData(sport, education, others, english, reading, writeOff);
         activityService.saveOrUpdate(username, data);
 
         return "success";
     }
-
 }
