@@ -1,6 +1,7 @@
 package com.skills.indicator.Controllers;
 
 
+import org.springframework.ui.Model;
 import com.skills.indicator.Dto.ActivityData;
 import com.skills.indicator.Service.ActivityService;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,15 @@ public class Controller {
     @GetMapping("/input")
     public String getInput(){
         return "input";
+    }
+
+    @GetMapping("/getStats")
+    public String getStats (Principal principal, Model model) {
+        String username = principal.getName();
+        int totalActivity = activityService.sumActivityByUsername(username);
+        model.addAttribute("totalActivity", totalActivity);
+        model.addAttribute("username", username);
+        return "stats";
     }
 
 
