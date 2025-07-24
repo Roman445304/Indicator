@@ -42,23 +42,11 @@ public class ActivityService {
      * @throws UsernameNotFoundException если пользователь не найден или возникла ошибка при сохранении
      */
     public void saveOrUpdate(String username, ActivityData data) {
-
         Optional <User> userOptional = userService.getUserByUsername(username);
-
         User user = userService.getUserByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("Пользователь " + username + " не найден"));
         Activity activity = getActivity(data, user);
         activityRepository.save(activity);
-//            try {
-//                if (userOptional.isPresent()) {
-//                    User user = userOptional.orElseThrow(RuntimeException::new);
-//                    Activity activity = getActivity(data, user);
-//                    activityRepository.save(activity);
-//                }
-//            }
-//            catch (Exception e) {
-//                throw new UsernameNotFoundException("Пользователь " + username + "не найден");
-//            }
         }
 
     private Activity getActivity(ActivityData data, User user) {
@@ -72,7 +60,6 @@ public class ActivityService {
                 .writeOff(toNegative(data.getWriteOff()))
                 .user(user)
                 .build();
-
     }
 
     /**
