@@ -4,22 +4,50 @@
     <title>Успешно сохранено</title>
     <style>
         body {
-            background-color: #d6f5d6; /* светло-зеленый */
+            background: url("/images/mountains.jpg") no-repeat center center fixed;
+            background-size: cover;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 30px; /* отступ сверху для цитаты */
+            box-sizing: border-box;
+        }
+
+        .quote-block {
+            text-align: center;
+            margin-bottom: 60px;
+            /* без фона и рамки */
+        }
+
+        .quote {
+            font-size: 32px;
+            font-weight: 600;
+            color: #1b5e20;
+            margin-bottom: 10px;
+        }
+
+        .author {
+            font-size: 24px;
+            font-weight: bold;
+            color: #388e3c;
         }
 
         .container {
             text-align: center;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
         }
 
         .icon {
             font-size: 80px;
-            color: #4CAF50; /* ярко-зелёный */
+            color: #4CAF50;
         }
 
         .message {
@@ -33,6 +61,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body>
+
+<!-- Цитата сверху страницы -->
+<div class="quote-block">
+    <div class="quote" th:text="${quoteText}">Цитата будет здесь</div>
+    <div class="author" th:text="${quoteAuthor}">Автор цитаты</div>
+</div>
+
+<!-- Основной блок с иконкой и сообщением -->
 <div class="container">
     <div class="icon">
         👍
