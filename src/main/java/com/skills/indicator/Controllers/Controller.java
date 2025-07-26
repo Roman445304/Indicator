@@ -1,6 +1,8 @@
 package com.skills.indicator.Controllers;
 
 
+import com.skills.indicator.Service.QuoteService;
+import org.springframework.ui.Model;
 import com.skills.indicator.Dto.ActivityData;
 import com.skills.indicator.Service.ActivityService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,9 @@ public class Controller {
 
     @Autowired
     private ActivityService activityService;
+
+    @Autowired
+    private QuoteService quoteService;
 
     @GetMapping("/")
     public String home(){
@@ -38,6 +43,15 @@ public class Controller {
         return "input";
     }
 
+    @GetMapping("/getStats")
+    public String getStats (Principal principal, Model model) {
+        String username = principal.getName();
+        int totalActivity = activityService.sumActivityByUsername(username);
+        model.addAttribute("totalActivity", totalActivity);
+        model.addAttribute("username", username);
+        return "stats";
+    }
+
 
     @PostMapping("/saveData")
     public String postActivity(
@@ -47,12 +61,12 @@ public class Controller {
             @RequestParam(required = false) Integer english,
             @RequestParam(required = false) Integer reading,
             @RequestParam(required = false) Integer writeOff
-            , Principal principal){
+            , Principal principal, Model model){
 
         String username = principal.getName();
         ActivityData data = new ActivityData(sport, education, others, english, reading, writeOff);
         activityService.saveOrUpdate(username, data);
-
+        quoteService.getQuote(model);
         return "success";
     }
 }
