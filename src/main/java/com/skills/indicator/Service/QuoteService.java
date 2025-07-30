@@ -2,6 +2,7 @@ package com.skills.indicator.Service;
 
 import com.skills.indicator.Dto.QuoteDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,8 @@ public class QuoteService {
 
     private final RestTemplate restTemplate;
 
-    private static final String QUOTES_API_URL = "https://zenquotes.io/api/random";
+    @Value("${QUOTES_API_URL}")
+    private String QUOTES_API_URL;
 
     @Autowired
     public QuoteService(RestTemplate restTemplate) {
