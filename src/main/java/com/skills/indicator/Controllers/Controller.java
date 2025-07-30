@@ -13,7 +13,6 @@ import java.security.Principal;
 
 @org.springframework.stereotype.Controller
 @RequiredArgsConstructor
-
 public class Controller {
 
     @Autowired
@@ -69,4 +68,6 @@ public class Controller {
         quoteService.getQuote(model);
         return "success";
     }
+
+
 }
